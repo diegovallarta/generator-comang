@@ -33,16 +33,16 @@ The project generator also optionally installs Twitter Bootstrap and JQuery.
 
 Available generators:
 
-* angular
-* angular:controller [module name]
-* angular:directive [module name]
-* angular:filter [module name]
-* angular:service [module name]
-* angular:provider [module name]
-* angular:factory [module name]
-* angular:value [module name]
-* angular:constant [module name]
-* angular:decorator [module name]
+* comang
+* comang:controller [module name]
+* comang:directive [module name]
+* comang:filter [module name]
+* comang:service [module name]
+* comang:provider [module name]
+* comang:factory [module name]
+* comang:value [module name]
+* comang:constant [module name]
+* comang:decorator [module name]
 
 **Note: Generators are to be run from the root directory of your app.**
 
