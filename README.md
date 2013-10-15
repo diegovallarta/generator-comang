@@ -20,7 +20,7 @@ After that follow the steps below.
 **Note: Do not edit directly your modules on the tester application or your changes will be lost.**
 
 * 2.a Use the command `grunt test` for launching unit tests with Karma and linting with jshint.
-* 2.b For test debugging use `grunt test:debug`
+* 2.b For test debugging use `grunt test:debug`.
 
 * 3. Use the command `grunt build` to generate a concatenated file of all your angular modules (in the future I will include a min.js file also).
 
