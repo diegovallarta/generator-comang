@@ -25,7 +25,7 @@ After that follow the steps below.
  3. Use the command `grunt build` to generate a concatenated file of all your angular modules (in the future I will include a min.js file also).
 
 
-### App
+### Tester App
 Sets up a new Expressjs, AngularJS and Node.js stack, generating all the boilerplate you need to get started developing modules for angular.
 The project generator also optionally installs Twitter Bootstrap and JQuery.
 
