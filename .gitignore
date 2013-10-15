@@ -1,3 +1,5 @@
 node_modules/
 temp/
 .git/
+.idea/
+generator-comang.iml
