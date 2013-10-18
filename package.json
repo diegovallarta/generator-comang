@@ -1,13 +1,12 @@
 {
     "name": "generator-comang",
     "version": "0.0.3",
-    "description": "Generator for creating bower dependencies using angularjs(v1.2.0-rc.2)",
+    "description": "Yeoman generator for creating an AngularJS (v1.2.0-rc.2) modules project",
     "keywords": [
         "yeoman-generator",
-        "bower",
         "angular",
-        "bootstrap",
-        "1.2"
+        "1.2",
+        "bootstrap"
     ],
     "author": {
         "name": "Diego Vallarta",
