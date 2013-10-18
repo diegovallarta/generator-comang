@@ -1,4 +1,3 @@
-// Generated on 2013-07-11 using generator-angular 0.3.0
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var path = require('path');
@@ -25,8 +24,6 @@ module.exports = function (grunt) {
         yeomanConfig.main = require('./bower.json').appPath || yeomanConfig.main;
     } catch (e) {}
 
-    grunt.loadNpmTasks('grunt-express');
-
     grunt.initConfig({
         yeoman: yeomanConfig,
         pkg: require('./package.json'),
@@ -34,7 +31,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT,
-                    spawn: false
+                    nospawn: true
                 },
                 files: [
                     '<%= yeoman.main %>/tester_app/*.html',
@@ -42,39 +39,51 @@ module.exports = function (grunt) {
                     '{.tmp,<%= yeoman.main %>}/tester_app/css/{,*/}*.css',
                     '{.tmp,<%= yeoman.main %>}/modules/**/**/*.js',
                     '{.tmp,<%= yeoman.main %>}/common/*.js',
+                    '<%= yeoman.main %>/tester_app/js/controller/*.js',
                     '<%= yeoman.main %>/tester_app/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
                 tasks: ['copy:server']
+            },
+            css: {
+                files: '<%= yeoman.main %>/tester_app/css/less/*.less',
+                tasks: ['less:compile']
             }
         },
-        express: {
-            options: {
-                port: 3000,
-                hostname: '*'
-            },
-            livereload: {
+        connect: {
+            server: {
                 options: {
+                    port: 3000,
                     livereload: true,
-                    server: path.resolve('app.js'),
-                    bases: [path.resolve('./.tmp'), path.resolve(__dirname, yeomanConfig.main+'/tester_app')]
+                    base: '<%= yeoman.main %>/tester_app/'
                 }
             },
             test: {
                 options: {
-                    server: path.resolve('app.js'),
-                    bases: [path.resolve('./.tmp'), path.resolve(__dirname, 'test')]
+                    port: 3000,
+                    base: '<%= yeoman.test %>/'
                 }
             },
             dist: {
                 options: {
-                    server: path.resolve('app.js'),
-                    bases: path.resolve(__dirname, yeomanConfig.dist)
+                    port: 3000,
+                    base: '<%= yeoman.dist %>/'
                 }
+            }
+        },
+        less: {
+            compile: {
+                  files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.main %>/tester_app/css/less/',
+                    src: ['*.less'],
+                    dest: '<%= yeoman.main %>/tester_app/css/',
+                    ext: '.css'
+                }]
             }
         },
         open: {
             server: {
-                url: 'http://localhost:<%= express.options.port %>'
+                url: 'http://localhost:<%= connect.server.options.port %>'
             }
         },
         meta: {
@@ -262,26 +271,20 @@ module.exports = function (grunt) {
         ]);
     });*/
 
-    grunt.registerTask('server', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'open', 'express:dist', 'express-keepalive']);
-        }
-
-        grunt.task.run([
+    grunt.registerTask('server', [
             'clean:server',
             'concurrent:server',
-            'express:livereload',
-            'open',
+            'connect:server',
+            'open:server',
             'watch'
-        ]);
-    });
+    ]);
 
     grunt.registerTask('test', function(mode){
         if(mode === 'debug'){
             return grunt.task.run([
                 'clean:server',
                 'concurrent:test',
-                'express:test',
+                'connect:test',
                 'karma:debug',
                 'jshint'
             ]);
@@ -290,11 +293,15 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:test',
-            'express:test',
+            'connect:test',
             'karma:unit',
             'jshint'
         ]);
     });
+
+    grunt.registerTask('testless', [
+        'less:compile'
+    ]);
 
     grunt.registerTask('build', [
         'clean:dist',
