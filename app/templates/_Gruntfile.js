@@ -30,7 +30,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT,
-                    nospawn: true
+                    spawn: false
                 },
                 files: [
                     '<%= yeoman.main %>/tester_app/*.html',
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.main %>/tester_app/js/controller/*.js',
                     '<%= yeoman.main %>/tester_app/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
-                tasks: ['copy:server']
+                tasks: ['sync:server']
             },
             css: {
                 files: '<%= yeoman.main %>/tester_app/css/less/*.less',
@@ -58,7 +58,6 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    port: 3000,
                     base: '<%= yeoman.test %>/'
                 }
             },
@@ -211,6 +210,33 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        sync: {
+            server: {
+                files: [
+                    {
+                        cwd: '<%= yeoman.main %>/modules',
+                        dest: '<%= yeoman.main %>/tester_app/js',
+                        src: [
+                            '**/**/*.js'
+                        ]
+                    },
+                    {
+                        cwd: '<%= yeoman.main %>',
+                        dest: '<%= yeoman.main %>/tester_app/js',
+                        src: [
+                            'common/*.js'
+                        ]
+                    },
+                    {
+                        cwd: '<%= yeoman.main %>/common/css',
+                        dest: '<%= yeoman.main %>/tester_app/css',
+                        src: [
+                            '*.css'
+                        ]
+                    }
+                ]
+            }
+        },
         concurrent: {
             server: [
                 'copy:server'
@@ -253,22 +279,6 @@ module.exports = function (grunt) {
             }
         }
     });
-
-    /*grunt.event.on('watch', function(action, filepath, target) {
-        grunt.log.writeln(target + ': ' + filepath + ' has been ' + action);
-        var cfgkey = ['copy', 'server', 'files'];
-        grunt.config.set(cfgkey, grunt.config.get(cfgkey).map(function(file) {
-            grunt.log.writeln(file.src);
-            file.src = filepath;
-            grunt.log.writeln(file.src);
-            return file;
-        }));
-
-        grunt.task.run([
-            'copy:server',
-            'express:livereload'
-        ]);
-    });*/
 
     grunt.registerTask('server', [
             'clean:server',

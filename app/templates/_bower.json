@@ -7,16 +7,16 @@
         "jquery": "latest", <% } %>
         "json3": "~3.2.4",
         "es5-shim": "~2.0.8",
-        "angular-route": "~1.2.0-rc.2",
-        "angular-resource": "~1.2.0-rc.2",
-        "angular-animate": "~1.2.0-rc.2",
-        "angular-touch": "~1.2.0-rc.2",
-        "angular-cookies": "~1.2.0-rc.2",
-        "angular-loader": "~1.2.0-rc.2",
-        "angular-sanitize": "~1.2.0-rc.2" 
+        "angular-route": "1.2.0",
+        "angular-resource": "1.2.0",
+        "angular-animate": "1.2.0",
+        "angular-touch": "1.2.0",
+        "angular-cookies": "1.2.0",
+        "angular-loader": "1.2.0",
+        "angular-sanitize": "1.2.0"
     },
     "devDependencies": {
-        "angular-mocks": "~1.2.0-rc.2",
-        "angular-scenario": "~1.2.0-rc.2"
+        "angular-mocks": "1.2.0",
+        "angular-scenario": "1.2.0"
     }
 }
