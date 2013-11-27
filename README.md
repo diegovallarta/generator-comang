@@ -1,7 +1,7 @@
 # generator-comang
 ================
 
-A yeoman generator for creating an AngularJS (v1.2.0-rc.2) modules project.
+A yeoman generator for creating an AngularJS (v1.2.0) modules project.
 
 Based on the [booang](https://github.com/diegovallarta/generator-booang) generator,
 the [MEAN stack](https://github.com/wlepinski/generator-meanstack) generator by W. Lepinski and
